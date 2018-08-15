@@ -1,0 +1,9 @@
+# IntelliJ IDEA files
+.idea/*
+*.iml
+
+# Compiled files
+target/*
+
+#Application Properties
+application.properties
