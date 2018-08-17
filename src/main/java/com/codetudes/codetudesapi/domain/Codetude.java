@@ -6,9 +6,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "codetude")
 public class Codetude {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -29,6 +32,14 @@ public class Codetude {
     private String subtitle;
 
     private String description;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name="codetude_tag",
+            joinColumns = { @JoinColumn(name = "codetude_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
+    )
+    private List<Tag> tags;
 
     private String sourceCodeLink;
 
@@ -114,6 +125,14 @@ public class Codetude {
         this.liveDemoLink = liveDemoLink;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public String toString() {
         return "Codetude{" +
@@ -125,6 +144,7 @@ public class Codetude {
                 ", title='" + title + '\'' +
                 ", subtitle='" + subtitle + '\'' +
                 ", description='" + description + '\'' +
+                ", tags=" + tags +
                 ", sourceCodeLink='" + sourceCodeLink + '\'' +
                 ", liveDemoLink='" + liveDemoLink + '\'' +
                 '}';
@@ -143,6 +163,7 @@ public class Codetude {
                 Objects.equals(title, codetude.title) &&
                 Objects.equals(subtitle, codetude.subtitle) &&
                 Objects.equals(description, codetude.description) &&
+                Objects.equals(tags, codetude.tags) &&
                 Objects.equals(sourceCodeLink, codetude.sourceCodeLink) &&
                 Objects.equals(liveDemoLink, codetude.liveDemoLink);
     }
@@ -150,6 +171,6 @@ public class Codetude {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, sourceCodeLink, liveDemoLink);
+        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, tags, sourceCodeLink, liveDemoLink);
     }
 }

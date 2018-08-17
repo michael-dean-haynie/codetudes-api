@@ -11,9 +11,9 @@ public class CodetudeController {
     @Autowired
     CodetudeService codetudeService;
 
-    @GetMapping
-    CodetudeDTO create(){
-        CodetudeDTO codetudeDTO = new CodetudeDTO();
-        return codetudeService.create(codetudeDTO);
-    }
+//    @GetMapping
+//    CodetudeDTO create(){
+//        CodetudeDTO codetudeDTO = new CodetudeDTO();
+//        return codetudeService.create(codetudeDTO);
+//    }
 }
