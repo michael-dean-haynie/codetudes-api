@@ -1,13 +1,8 @@
-package com.codetudes.codetudesapi.domain;
+package com.codetudes.codetudesapi.contracts;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "tag")
-public class Tag {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+public class TagDTO {
     private Long id;
 
     private String name;
@@ -30,7 +25,7 @@ public class Tag {
 
     @Override
     public String toString() {
-        return "Tag{" +
+        return "TagDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -40,9 +35,9 @@ public class Tag {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Tag tag = (Tag) o;
-        return Objects.equals(id, tag.id) &&
-                Objects.equals(name, tag.name);
+        TagDTO tagDTO = (TagDTO) o;
+        return Objects.equals(id, tagDTO.id) &&
+                Objects.equals(name, tagDTO.name);
     }
 
     @Override

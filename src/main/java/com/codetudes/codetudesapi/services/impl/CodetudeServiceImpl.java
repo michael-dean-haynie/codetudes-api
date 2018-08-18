@@ -19,4 +19,17 @@ public class CodetudeServiceImpl implements CodetudeService {
     public CodetudeDTO create(CodetudeDTO codetudeDTO){
         return mapper.map(codetudeRepository.save(mapper.map(codetudeDTO, Codetude.class)), CodetudeDTO.class);
     }
+
+    public CodetudeDTO read(Long id){
+        return mapper.map(codetudeRepository.findById(id), CodetudeDTO.class);
+    }
+
+    public CodetudeDTO update(CodetudeDTO codetudeDTO){
+        return mapper.map(codetudeRepository.save(mapper.map(codetudeDTO, Codetude.class)), CodetudeDTO.class);
+    }
+
+    public Long delete(Long id){
+        codetudeRepository.deleteById(id);
+        return id;
+    }
 }

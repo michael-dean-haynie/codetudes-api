@@ -1,7 +1,10 @@
 package com.codetudes.codetudesapi.contracts;
 
+import com.codetudes.codetudesapi.domain.Tag;
+
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 public class CodetudeDTO {
@@ -25,6 +28,8 @@ public class CodetudeDTO {
     private String sourceCodeLink;
 
     private String liveDemoLink;
+
+    private List<Tag> tags;
 
     public Long getId() {
         return id;
@@ -106,9 +111,17 @@ public class CodetudeDTO {
         this.liveDemoLink = liveDemoLink;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public String toString() {
-        return "Codetude{" +
+        return "CodetudeDTO{" +
                 "id=" + id +
                 ", created=" + created +
                 ", updated=" + updated +
@@ -119,6 +132,7 @@ public class CodetudeDTO {
                 ", description='" + description + '\'' +
                 ", sourceCodeLink='" + sourceCodeLink + '\'' +
                 ", liveDemoLink='" + liveDemoLink + '\'' +
+                ", tags=" + tags +
                 '}';
     }
 
@@ -136,12 +150,13 @@ public class CodetudeDTO {
                 Objects.equals(subtitle, that.subtitle) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(sourceCodeLink, that.sourceCodeLink) &&
-                Objects.equals(liveDemoLink, that.liveDemoLink);
+                Objects.equals(liveDemoLink, that.liveDemoLink) &&
+                Objects.equals(tags, that.tags);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, sourceCodeLink, liveDemoLink);
+        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, sourceCodeLink, liveDemoLink, tags);
     }
 }

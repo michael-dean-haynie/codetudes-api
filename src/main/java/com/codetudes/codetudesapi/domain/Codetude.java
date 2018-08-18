@@ -8,7 +8,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "codetude")
@@ -33,17 +32,17 @@ public class Codetude {
 
     private String description;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private String sourceCodeLink;
+
+    private String liveDemoLink;
+
+    @OneToMany(cascade={CascadeType.MERGE})
     @JoinTable(
             name="codetude_tag",
             joinColumns = { @JoinColumn(name = "codetude_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") }
     )
     private List<Tag> tags;
-
-    private String sourceCodeLink;
-
-    private String liveDemoLink;
 
     public Long getId() {
         return id;
