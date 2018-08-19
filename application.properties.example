@@ -6,4 +6,4 @@ spring.datasource.password=[password]
 spring.jpa.show-sql=false
 spring.jpa.properties.hibernate.format_sql=false
 
-cors.ui=localhost:4200
+cors.ui=http://localhost:4200
