@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +40,13 @@ public class CodetudeServiceImpl implements CodetudeService {
     public Long delete(Long id){
         codetudeRepository.deleteById(id);
         return id;
+    }
+
+    public List<CodetudeDTO> findAll(){
+        List<CodetudeDTO> dtos = new ArrayList<CodetudeDTO>();
+        codetudeRepository.findAll().iterator().forEachRemaining(entity -> {
+            dtos.add(mapper.map(entity, CodetudeDTO.class));
+        });
+        return dtos;
     }
 }

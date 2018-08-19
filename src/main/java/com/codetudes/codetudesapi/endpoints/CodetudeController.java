@@ -5,6 +5,8 @@ import com.codetudes.codetudesapi.services.CodetudeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/codetudes")
 public class CodetudeController {
@@ -29,5 +31,10 @@ public class CodetudeController {
     @DeleteMapping("/{id}")
     Long delete(@PathVariable Long id){
         return codetudeService.delete(id);
+    }
+
+    @GetMapping
+    List<CodetudeDTO> findAll(){
+        return codetudeService.findAll();
     }
 }
