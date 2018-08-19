@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "bcd1eb51-e329-41cc-8ce1-690f0fa09988",
+		"name": "codetudes-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "codetudes",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"CSS\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/codetudes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create (with tags)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 4,\n\t\t\t\"name\": \"HTML\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 5,\n\t\t\t\"name\": \"CSS\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/codetudes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes"
+							]
+						},
+						"description": "Will need to have the tags created first"
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"CSS\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/codetudes/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/codetudes/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/codetudes/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tags",
+			"item": [
+				{
+					"name": "create (html)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"HTML\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/tags",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create (css)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"CSS\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/tags",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"CSS\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/codetudes/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/codetudes/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/codetudes/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
