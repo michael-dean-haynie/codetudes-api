@@ -1,5 +1,6 @@
 package com.codetudes.codetudesapi.services.impl;
 
+import com.codetudes.codetudesapi.config.errors.NotFoundException;
 import com.codetudes.codetudesapi.contracts.CodetudeDTO;
 import com.codetudes.codetudesapi.domain.Codetude;
 import com.codetudes.codetudesapi.repositories.CodetudeRepository;
@@ -7,6 +8,8 @@ import com.codetudes.codetudesapi.services.CodetudeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CodetudeServiceImpl implements CodetudeService {
@@ -21,7 +24,11 @@ public class CodetudeServiceImpl implements CodetudeService {
     }
 
     public CodetudeDTO read(Long id){
-        return mapper.map(codetudeRepository.findById(id), CodetudeDTO.class);
+        Optional<Codetude> entityOpt = codetudeRepository.findById(id);
+        if (!entityOpt.isPresent()){
+            throw new NotFoundException();
+        }
+        return mapper.map(entityOpt.get(), CodetudeDTO.class);
     }
 
     public CodetudeDTO update(CodetudeDTO codetudeDTO){
