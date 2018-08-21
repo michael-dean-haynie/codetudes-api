@@ -21,6 +21,9 @@ public class Application {
       SpringApplication.run(Application.class, args);
     }
 
+    @Autowired
+    private Environment env;
+
     @Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
