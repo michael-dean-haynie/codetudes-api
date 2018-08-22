@@ -29,7 +29,7 @@ public class CodetudeDTO {
 
     private String liveDemoLink;
 
-    private List<Tag> tags;
+    private List<TagDTO> tags;
 
     public Long getId() {
         return id;
@@ -111,11 +111,11 @@ public class CodetudeDTO {
         this.liveDemoLink = liveDemoLink;
     }
 
-    public List<Tag> getTags() {
+    public List<TagDTO> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(List<TagDTO> tags) {
         this.tags = tags;
     }
 
