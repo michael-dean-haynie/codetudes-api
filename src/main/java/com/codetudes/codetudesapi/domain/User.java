@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +24,17 @@ public class User {
 
     @UpdateTimestamp
     private Timestamp updated;
+
+    @OneToMany(
+            cascade={CascadeType.MERGE},
+            fetch=FetchType.EAGER
+    )
+    @JoinTable(
+            name="role_user",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") }
+    )
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -64,6 +76,14 @@ public class User {
         this.updated = updated;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -72,6 +92,7 @@ public class User {
                 ", secret='" + secret + '\'' +
                 ", created=" + created +
                 ", updated=" + updated +
+                ", roles=" + roles +
                 '}';
     }
 
@@ -84,12 +105,13 @@ public class User {
                 Objects.equals(email, user.email) &&
                 Objects.equals(secret, user.secret) &&
                 Objects.equals(created, user.created) &&
-                Objects.equals(updated, user.updated);
+                Objects.equals(updated, user.updated) &&
+                Objects.equals(roles, user.roles);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, email, secret, created, updated);
+        return Objects.hash(id, email, secret, created, updated, roles);
     }
 }

@@ -1,10 +1,14 @@
 package com.codetudes.codetudesapi.config.seeding;
 
+import com.codetudes.codetudesapi.contracts.RoleDTO;
 import com.codetudes.codetudesapi.contracts.UserDTO;
 import com.codetudes.codetudesapi.domain.Codetude;
+import com.codetudes.codetudesapi.domain.Role;
 import com.codetudes.codetudesapi.domain.Tag;
 import com.codetudes.codetudesapi.repositories.CodetudeRepository;
+import com.codetudes.codetudesapi.repositories.RoleRepository;
 import com.codetudes.codetudesapi.repositories.TagRepository;
+import com.codetudes.codetudesapi.repositories.UserRepository;
 import com.codetudes.codetudesapi.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +19,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class SeedOnStartup {
@@ -41,6 +42,12 @@ public class SeedOnStartup {
     private TagRepository tagRepository;
 
     @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     private UserService userService;
 
     @EventListener
@@ -58,6 +65,8 @@ public class SeedOnStartup {
         jdbcTemplate.execute("DELETE FROM `codetudes`.`codetude`     WHERE `id` > 0;");
         jdbcTemplate.execute("DELETE FROM `codetudes`.`codetude_tag` WHERE `id` > 0;");
         jdbcTemplate.execute("DELETE FROM `codetudes`.`user`         WHERE `id` > 0;");
+        jdbcTemplate.execute("DELETE FROM `codetudes`.`role`         WHERE `id` > 0;");
+        jdbcTemplate.execute("DELETE FROM `codetudes`.`role_user`    WHERE `id` > 0;");
     }
 
     private void resetAutoIncrement(){
@@ -65,6 +74,8 @@ public class SeedOnStartup {
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`codetude`     AUTO_INCREMENT = 1;");
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`codetude_tag` AUTO_INCREMENT = 1;");
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`user`         AUTO_INCREMENT = 1;");
+        jdbcTemplate.execute("ALTER TABLE `codetudes`.`role`         AUTO_INCREMENT = 1;");
+        jdbcTemplate.execute("ALTER TABLE `codetudes`.`role_user`    AUTO_INCREMENT = 1;");
     }
 
     private void seed(){
@@ -145,13 +156,28 @@ public class SeedOnStartup {
                 "https://youtu.be/rEGOihjqO9w",
                 new String[]{} );
 
-        // Create User
+        // Create Roles
+        Role userRole = new Role();
+        userRole.setName("USER");
+        userRole = roleRepository.save(userRole);
+
+        Role adminRole = new Role();
+        adminRole.setName("ADMIN");
+        adminRole = roleRepository.save(adminRole);
+
+
+        // Create Users
         UserDTO user = new UserDTO();
-        String email = "admin@codetudes.com";
-        String secret = "admin";
-        user.setEmail(email);
-        user.setSecret(secret);
+        user.setEmail("user@codetudes.com");
+        user.setSecret("user");
+        user.setRoles(Arrays.asList(mapper.map(userRole, RoleDTO.class)));
         userService.createUser(user);
+
+        UserDTO admin = new UserDTO();
+        admin.setEmail("admin@codetudes.com");
+        admin.setSecret("admin");
+        admin.setRoles(Arrays.asList(mapper.map(adminRole, RoleDTO.class)));
+        userService.createUser(admin);
     }
 
     private void createCodetude(String title, String subtitle, String description, Boolean autoStarted, Boolean autoFinished, String scl, String ldl, String[] tagVals){

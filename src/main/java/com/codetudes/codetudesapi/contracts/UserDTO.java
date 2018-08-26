@@ -1,6 +1,7 @@
 package com.codetudes.codetudesapi.contracts;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 public class UserDTO {
@@ -13,6 +14,8 @@ public class UserDTO {
     private Timestamp created;
 
     private Timestamp updated;
+
+    private  List<RoleDTO> roles;
 
     public Long getId() {
         return id;
@@ -54,6 +57,14 @@ public class UserDTO {
         this.updated = updated;
     }
 
+    public List<RoleDTO> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleDTO> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -62,6 +73,7 @@ public class UserDTO {
                 ", secret='" + secret + '\'' +
                 ", created=" + created +
                 ", updated=" + updated +
+                ", roles=" + roles +
                 '}';
     }
 
@@ -74,12 +86,13 @@ public class UserDTO {
                 Objects.equals(email, userDTO.email) &&
                 Objects.equals(secret, userDTO.secret) &&
                 Objects.equals(created, userDTO.created) &&
-                Objects.equals(updated, userDTO.updated);
+                Objects.equals(updated, userDTO.updated) &&
+                Objects.equals(roles, userDTO.roles);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, email, secret, created, updated);
+        return Objects.hash(id, email, secret, created, updated, roles);
     }
 }

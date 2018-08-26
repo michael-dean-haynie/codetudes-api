@@ -36,7 +36,10 @@ public class Codetude {
 
     private String liveDemoLink;
 
-    @OneToMany(cascade={CascadeType.MERGE})
+    @OneToMany(
+            cascade={CascadeType.MERGE},
+            fetch=FetchType.EAGER
+    )
     @JoinTable(
             name="codetude_tag",
             joinColumns = { @JoinColumn(name = "codetude_id") },
