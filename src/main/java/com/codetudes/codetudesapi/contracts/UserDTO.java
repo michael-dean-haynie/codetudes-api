@@ -1,20 +1,17 @@
 package com.codetudes.codetudesapi.contracts;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class TagDTO {
+public class UserDTO {
     private Long id;
 
-    private String name;
+    private String email;
 
-    @CreationTimestamp
+    private String secret;
+
     private Timestamp created;
 
-    @UpdateTimestamp
     private Timestamp updated;
 
     public Long getId() {
@@ -25,12 +22,20 @@ public class TagDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 
     public Timestamp getCreated() {
@@ -51,9 +56,10 @@ public class TagDTO {
 
     @Override
     public String toString() {
-        return "TagDTO{" +
+        return "UserDTO{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", secret='" + secret + '\'' +
                 ", created=" + created +
                 ", updated=" + updated +
                 '}';
@@ -63,16 +69,17 @@ public class TagDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TagDTO tagDTO = (TagDTO) o;
-        return Objects.equals(id, tagDTO.id) &&
-                Objects.equals(name, tagDTO.name) &&
-                Objects.equals(created, tagDTO.created) &&
-                Objects.equals(updated, tagDTO.updated);
+        UserDTO userDTO = (UserDTO) o;
+        return Objects.equals(id, userDTO.id) &&
+                Objects.equals(email, userDTO.email) &&
+                Objects.equals(secret, userDTO.secret) &&
+                Objects.equals(created, userDTO.created) &&
+                Objects.equals(updated, userDTO.updated);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, created, updated);
+        return Objects.hash(id, email, secret, created, updated);
     }
 }

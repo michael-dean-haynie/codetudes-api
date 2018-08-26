@@ -1,6 +1,10 @@
 package com.codetudes.codetudesapi.domain;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +15,12 @@ public class Tag {
     private Long id;
 
     private String name;
+
+    @CreationTimestamp
+    private Timestamp created;
+
+    @UpdateTimestamp
+    private Timestamp updated;
 
     public Long getId() {
         return id;
@@ -28,11 +38,29 @@ public class Tag {
         this.name = name;
     }
 
+    public Timestamp getCreated() {
+        return created;
+    }
+
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
+
+    public Timestamp getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Timestamp updated) {
+        this.updated = updated;
+    }
+
     @Override
     public String toString() {
         return "Tag{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
                 '}';
     }
 
@@ -42,12 +70,14 @@ public class Tag {
         if (o == null || getClass() != o.getClass()) return false;
         Tag tag = (Tag) o;
         return Objects.equals(id, tag.id) &&
-                Objects.equals(name, tag.name);
+                Objects.equals(name, tag.name) &&
+                Objects.equals(created, tag.created) &&
+                Objects.equals(updated, tag.updated);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, created, updated);
     }
 }

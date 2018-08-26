@@ -1,9 +1,11 @@
 package com.codetudes.codetudesapi.config.seeding;
 
+import com.codetudes.codetudesapi.contracts.UserDTO;
 import com.codetudes.codetudesapi.domain.Codetude;
 import com.codetudes.codetudesapi.domain.Tag;
 import com.codetudes.codetudesapi.repositories.CodetudeRepository;
 import com.codetudes.codetudesapi.repositories.TagRepository;
+import com.codetudes.codetudesapi.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -33,10 +35,13 @@ public class SeedOnStartup {
     private ModelMapper mapper;
 
     @Autowired
-    CodetudeRepository codetudeRepository;
+    private CodetudeRepository codetudeRepository;
 
     @Autowired
-    TagRepository tagRepository;
+    private TagRepository tagRepository;
+
+    @Autowired
+    private UserService userService;
 
     @EventListener
     public void checkAndSeed(ContextRefreshedEvent event){
@@ -52,12 +57,14 @@ public class SeedOnStartup {
         jdbcTemplate.execute("DELETE FROM `codetudes`.`tag`          WHERE `id` > 0;");
         jdbcTemplate.execute("DELETE FROM `codetudes`.`codetude`     WHERE `id` > 0;");
         jdbcTemplate.execute("DELETE FROM `codetudes`.`codetude_tag` WHERE `id` > 0;");
+        jdbcTemplate.execute("DELETE FROM `codetudes`.`user`         WHERE `id` > 0;");
     }
 
     private void resetAutoIncrement(){
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`tag`          AUTO_INCREMENT = 1;");
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`codetude`     AUTO_INCREMENT = 1;");
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`codetude_tag` AUTO_INCREMENT = 1;");
+        jdbcTemplate.execute("ALTER TABLE `codetudes`.`user`         AUTO_INCREMENT = 1;");
     }
 
     private void seed(){
@@ -138,6 +145,13 @@ public class SeedOnStartup {
                 "https://youtu.be/rEGOihjqO9w",
                 new String[]{} );
 
+        // Create User
+        UserDTO user = new UserDTO();
+        String email = "admin@codetudes.com";
+        String secret = "admin";
+        user.setEmail(email);
+        user.setSecret(secret);
+        userService.createUser(user);
     }
 
     private void createCodetude(String title, String subtitle, String description, Boolean autoStarted, Boolean autoFinished, String scl, String ldl, String[] tagVals){
