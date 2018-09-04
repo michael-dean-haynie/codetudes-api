@@ -1,15 +1,10 @@
 package com.codetudes.codetudesapi.config.seeding;
 
-import com.codetudes.codetudesapi.contracts.RoleDTO;
-import com.codetudes.codetudesapi.contracts.UserDTO;
 import com.codetudes.codetudesapi.domain.Codetude;
-import com.codetudes.codetudesapi.domain.Role;
 import com.codetudes.codetudesapi.domain.Tag;
 import com.codetudes.codetudesapi.repositories.CodetudeRepository;
-import com.codetudes.codetudesapi.repositories.RoleRepository;
 import com.codetudes.codetudesapi.repositories.TagRepository;
-import com.codetudes.codetudesapi.repositories.UserRepository;
-import com.codetudes.codetudesapi.services.UserService;
+import org.modelmapper.ModelMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -41,14 +36,6 @@ public class SeedOnStartup {
     @Autowired
     private TagRepository tagRepository;
 
-    @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    private UserService userService;
 
     @EventListener
     public void checkAndSeed(ContextRefreshedEvent event){
@@ -156,28 +143,6 @@ public class SeedOnStartup {
                 "https://youtu.be/rEGOihjqO9w",
                 new String[]{} );
 
-        // Create Roles
-        Role userRole = new Role();
-        userRole.setName("USER");
-        userRole = roleRepository.save(userRole);
-
-        Role adminRole = new Role();
-        adminRole.setName("ADMIN");
-        adminRole = roleRepository.save(adminRole);
-
-
-        // Create Users
-        UserDTO user = new UserDTO();
-        user.setEmail("user@codetudes.com");
-        user.setSecret("user");
-        user.setRoles(Arrays.asList(mapper.map(userRole, RoleDTO.class)));
-        userService.createUser(user);
-
-        UserDTO admin = new UserDTO();
-        admin.setEmail("admin@codetudes.com");
-        admin.setSecret("admin");
-        admin.setRoles(Arrays.asList(mapper.map(adminRole, RoleDTO.class)));
-        userService.createUser(admin);
     }
 
     private void createCodetude(String title, String subtitle, String description, Boolean autoStarted, Boolean autoFinished, String scl, String ldl, String[] tagVals){
