@@ -1,14 +1,19 @@
+# DATABASE
 spring.jpa.hibernate.ddl-auto=none
 spring.datasource.url=jdbc:mysql://localhost:3306/codetudes
 spring.datasource.username=[username]
 spring.datasource.password=[password]
-
 spring.jpa.show-sql=false
 spring.jpa.properties.hibernate.format_sql=false
-
-cors.ui=http://localhost:4200
 
 # DANGER! WILL DROP ALL EXISTING DATA IF TRUE!
 seed-db-on-startup:false
 
+# CORS
+cors.ui=http://localhost:4200
+
+# DEBUG
 trace:false
+
+# SECURITY
+jwt.private-secret: totallytheprivatesecret

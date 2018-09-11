@@ -3,6 +3,7 @@ package com.codetudes.codetudesapi.endpoints;
 import com.codetudes.codetudesapi.contracts.CodetudeDTO;
 import com.codetudes.codetudesapi.services.CodetudeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class CodetudeController {
         return codetudeService.create(codetudeDTO);
     }
 
+//    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{id}")
     CodetudeDTO read(@PathVariable Long id){
         return codetudeService.read(id);
