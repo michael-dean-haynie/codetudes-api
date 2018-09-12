@@ -11,6 +11,16 @@
 				{
 					"name": "create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -20,7 +30,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"CSS\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
 						},
 						"url": {
 							"raw": "{{host}}/codetudes",
@@ -37,6 +47,16 @@
 				{
 					"name": "create (with tags)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -64,6 +84,9 @@
 				{
 					"name": "read",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -91,6 +114,16 @@
 				{
 					"name": "update",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -100,16 +133,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+							"raw": "{\n    \"id\": 1,\n    \"created\": \"2018-09-12T01:48:37.000+0000\",\n    \"updated\": \"2018-09-12T01:48:37.000+0000\",\n    \"started\": \"2018-09-11\",\n    \"finished\": null,\n    \"title\": \"Moonlight Sonata\",\n    \"subtitle\": \"Beethoven\",\n    \"description\": \"The heart-stoppingly beautiful first movement of Beethoven’s ‘Moonlight’ Sonata is the most famous from his work, and was described by composer Hector Berlioz as a ‘lamentation’. But it couldn’t be more different from the third movement, an epic technical work-out for the fingers.\",\n    \"sourceCodeLink\": \"https://youtu.be/4Tr0otuiQuU\",\n    \"liveDemoLink\": \"https://youtu.be/4Tr0otuiQuU\",\n    \"tags\": [\n        {\n            \"id\": 10,\n            \"name\": \"Sonata\",\n            \"created\": \"2018-09-12T01:48:36.000+0000\",\n            \"updated\": \"2018-09-12T01:48:36.000+0000\"\n        },\n        {\n            \"id\": 11,\n            \"name\": \"Prelude\",\n            \"created\": \"2018-09-12T01:48:36.000+0000\",\n            \"updated\": \"2018-09-12T01:48:36.000+0000\"\n        },\n        {\n            \"id\": 12,\n            \"name\": \"Trio\",\n            \"created\": \"2018-09-12T01:48:37.000+0000\",\n            \"updated\": \"2018-09-12T01:48:37.000+0000\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Trill\",\n            \"created\": \"2018-09-12T01:48:36.000+0000\",\n            \"updated\": \"2018-09-12T01:48:36.000+0000\"\n        },\n        {\n            \"id\": 15,\n            \"name\": \"Compound Meter\",\n            \"created\": \"2018-09-12T01:48:37.000+0000\",\n            \"updated\": \"2018-09-12T01:48:37.000+0000\"\n        }\n    ]\n}"
 						},
 						"url": {
-							"raw": "{{host}}/codetudes/4",
+							"raw": "{{host}}/codetudes",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"codetudes",
-								"4"
+								"codetudes"
 							]
 						}
 					},
@@ -118,17 +150,27 @@
 				{
 					"name": "delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{host}}/codetudes/3",
+							"raw": "{{host}}/codetudes/9",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"codetudes",
-								"3"
+								"9"
 							]
 						}
 					},
@@ -142,6 +184,16 @@
 				{
 					"name": "create (html)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -168,6 +220,16 @@
 				{
 					"name": "create (css)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -194,6 +256,9 @@
 				{
 					"name": "read",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -206,13 +271,13 @@
 							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"CSS\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/codetudes/4",
+							"raw": "{{host}}/tags/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"codetudes",
-								"4"
+								"tags",
+								"1"
 							]
 						}
 					},
@@ -230,16 +295,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"Motif\",\n    \"created\": \"2018-09-12T01:54:51.000+0000\",\n    \"updated\": \"2018-09-12T01:54:51.000+0000\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/codetudes/4",
+							"raw": "{{host}}/tags",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"codetudes",
-								"4"
+								"tags"
 							]
 						}
 					},
@@ -248,17 +312,65 @@
 				{
 					"name": "delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{host}}/codetudes/3",
+							"raw": "{{host}}/tags/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"codetudes",
-								"3"
+								"tags",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
 							]
 						}
 					},

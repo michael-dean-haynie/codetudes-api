@@ -14,22 +14,24 @@ public class CodetudeController {
     @Autowired
     CodetudeService codetudeService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     CodetudeDTO create(@RequestBody CodetudeDTO codetudeDTO){
         return codetudeService.create(codetudeDTO);
     }
 
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     CodetudeDTO read(@PathVariable Long id){
         return codetudeService.read(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping
     CodetudeDTO update(@RequestBody CodetudeDTO codetudeDTO){
         return codetudeService.update(codetudeDTO);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     Long delete(@PathVariable Long id){
         return codetudeService.delete(id);
