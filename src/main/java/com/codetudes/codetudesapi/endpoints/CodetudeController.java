@@ -19,7 +19,7 @@ public class CodetudeController {
         return codetudeService.create(codetudeDTO);
     }
 
-//    @PreAuthorize("hasRole('ROLE_USER')")
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     CodetudeDTO read(@PathVariable Long id){
         return codetudeService.read(id);

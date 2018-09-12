@@ -17,3 +17,5 @@ trace:false
 
 # SECURITY
 jwt.private-secret: totallytheprivatesecret
+admin.un: admin
+admin.pw admin

@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -69,13 +70,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-        System.out.println(env.getProperty("jwt.private-secret"));
-        System.out.println(env.getProperty("jwt.private-secret").getBytes());
 
+        User user = (User) auth.getPrincipal();
+        String username = user.getUsername();
+        String[] authorities = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toArray(String[]::new);
 
         String token = JWT.create()
-                .withSubject(((User) auth.getPrincipal()).getUsername())
+                .withSubject(username)
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .withArrayClaim(JWT_CLAIM_KEY_FOR_ROLE, authorities)
                 .sign(Algorithm.HMAC512(env.getProperty("jwt.private-secret").getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
     }
