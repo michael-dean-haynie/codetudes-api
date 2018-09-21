@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/tags")
 public class TagController {
@@ -33,5 +36,10 @@ public class TagController {
     @DeleteMapping("/{id}")
     Long delete(@PathVariable Long id){
         return tagService.delete(id);
+    }
+
+    @GetMapping
+    List<TagDTO> findAll(){
+        return tagService.findAll();
     }
 }

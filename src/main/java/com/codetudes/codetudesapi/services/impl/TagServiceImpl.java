@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +40,13 @@ public class TagServiceImpl implements TagService {
     public Long delete(Long id){
         tagRepository.deleteById(id);
         return id;
+    }
+
+    public List<TagDTO> findAll(){
+        List<TagDTO> dtos = new ArrayList<TagDTO>();
+        tagRepository.findAll().iterator().forEachRemaining(entity -> {
+            dtos.add(mapper.map(entity, TagDTO.class));
+        });
+        return dtos;
     }
 }

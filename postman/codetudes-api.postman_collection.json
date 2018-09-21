@@ -175,6 +175,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/codetudes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"codetudes"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -286,6 +304,16 @@
 				{
 					"name": "update",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -333,6 +361,24 @@
 							"path": [
 								"tags",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/tags",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tags"
 							]
 						}
 					},
