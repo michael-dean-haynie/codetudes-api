@@ -83,6 +83,7 @@ public class SeedOnStartup {
                 false,
                 "https://youtu.be/4Tr0otuiQuU",
                 "https://youtu.be/4Tr0otuiQuU",
+                false,
                 new String[]{"Sonata", "Prelude", "Trio", "Trill", "Compound Meter"} );
         createCodetude("Clair de Lune",
                 "Debussy",
@@ -91,6 +92,7 @@ public class SeedOnStartup {
                 true,
                 "https://youtu.be/4fvo_iOuSck",
                 "https://youtu.be/4fvo_iOuSck",
+                true,
                 new String[]{"Impressionism", "Pianissimo", "Compound Meter"} );
         createCodetude("Nocturne in E-flat Major (Op. 9, No. 2)",
                 "Chopin",
@@ -99,6 +101,7 @@ public class SeedOnStartup {
                 true,
                 "https://youtu.be/tV5U8kVYS88",
                 "https://youtu.be/tV5U8kVYS88",
+                true,
                 new String[]{"Minor", "Arpeggio", "Counter Melody", "Trill"} );
         createCodetude("Scenes from Childhood",
                 "Schumann",
@@ -107,6 +110,7 @@ public class SeedOnStartup {
                 false,
                 "https://youtu.be/yibf6QNjgGU",
                 "https://youtu.be/yibf6QNjgGU",
+                true,
                 new String[]{"A cappella", "Duet", "Polyphony", "Compound Meter"} );
         createCodetude("The Well-Tempered Clavier",
                 "J.S. Bach",
@@ -115,6 +119,7 @@ public class SeedOnStartup {
                 true,
                 "https://youtu.be/nPHIZw7HZq4",
                 "https://youtu.be/nPHIZw7HZq4",
+                true,
                 new String[]{"Rondo", "Trill", "Waltz", "Motif"} );
         createCodetude("Rhapsody in Blue",
                 "Gershwin",
@@ -123,6 +128,7 @@ public class SeedOnStartup {
                 true,
                 "https://youtu.be/ss2GFGMu198",
                 "https://youtu.be/ss2GFGMu198",
+                true,
                 new String[]{"Jazz", "Trill"} );
         createCodetude("Piano sonata in B minor",
                 "Liszt",
@@ -133,6 +139,7 @@ public class SeedOnStartup {
                 true,
                 "https://youtu.be/68EMzR3Ct78",
                 "https://youtu.be/68EMzR3Ct78",
+                true,
                 new String[]{"Minor", "Piano"} );
         createCodetude("Piano Concerto No.2 in C minor",
                 "Rachmaninov",
@@ -141,11 +148,21 @@ public class SeedOnStartup {
                 true,
                 "https://youtu.be/rEGOihjqO9w",
                 "https://youtu.be/rEGOihjqO9w",
+                true,
                 new String[]{} );
 
     }
 
-    private void createCodetude(String title, String subtitle, String description, Boolean autoStarted, Boolean autoFinished, String scl, String ldl, String[] tagVals){
+    private void createCodetude(
+            String title,
+            String subtitle,
+            String description,
+            Boolean autoStarted,
+            Boolean autoFinished,
+            String scl,
+            String ldl,
+            Boolean live,
+            String[] tagVals){
         Codetude codetude = new Codetude();
         codetude.setStarted(autoStarted ? new Date(System.currentTimeMillis()) : null);
         codetude.setFinished(autoFinished ? new Date(System.currentTimeMillis()) : null);
@@ -154,6 +171,7 @@ public class SeedOnStartup {
         codetude.setDescription(description);
         codetude.setSourceCodeLink(scl);
         codetude.setLiveDemoLink(ldl);
+        codetude.setLive(live);
 
         List<Tag> tags = new ArrayList<>();
         for(String tagVal : tagVals){

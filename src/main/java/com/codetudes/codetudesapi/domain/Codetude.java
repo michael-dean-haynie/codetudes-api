@@ -1,6 +1,7 @@
 package com.codetudes.codetudesapi.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -35,6 +36,8 @@ public class Codetude {
     private String sourceCodeLink;
 
     private String liveDemoLink;
+
+    private Boolean live;
 
     @OneToMany(
             cascade={CascadeType.MERGE},
@@ -135,6 +138,14 @@ public class Codetude {
         this.tags = tags;
     }
 
+    public Boolean getLive() {
+        return live;
+    }
+
+    public void setLive(Boolean live) {
+        this.live = live;
+    }
+
     @Override
     public String toString() {
         return "Codetude{" +
@@ -146,9 +157,10 @@ public class Codetude {
                 ", title='" + title + '\'' +
                 ", subtitle='" + subtitle + '\'' +
                 ", description='" + description + '\'' +
-                ", tags=" + tags +
                 ", sourceCodeLink='" + sourceCodeLink + '\'' +
                 ", liveDemoLink='" + liveDemoLink + '\'' +
+                ", live=" + live +
+                ", tags=" + tags +
                 '}';
     }
 
@@ -165,14 +177,15 @@ public class Codetude {
                 Objects.equals(title, codetude.title) &&
                 Objects.equals(subtitle, codetude.subtitle) &&
                 Objects.equals(description, codetude.description) &&
-                Objects.equals(tags, codetude.tags) &&
                 Objects.equals(sourceCodeLink, codetude.sourceCodeLink) &&
-                Objects.equals(liveDemoLink, codetude.liveDemoLink);
+                Objects.equals(liveDemoLink, codetude.liveDemoLink) &&
+                Objects.equals(live, codetude.live) &&
+                Objects.equals(tags, codetude.tags);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, tags, sourceCodeLink, liveDemoLink);
+        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, sourceCodeLink, liveDemoLink, live, tags);
     }
 }

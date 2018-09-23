@@ -35,6 +35,7 @@ CREATE TABLE `codetude` (
   `description` varchar(1000) DEFAULT NULL,
   `source_code_link` varchar(45) DEFAULT NULL,
   `live_demo_link` varchar(45) DEFAULT NULL,
+  `live` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -138,4 +139,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-26 13:30:58
+-- Dump completed on 2018-09-23 14:18:27

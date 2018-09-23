@@ -29,6 +29,8 @@ public class CodetudeDTO {
 
     private String liveDemoLink;
 
+    private Boolean live;
+
     private List<TagDTO> tags;
 
     public Long getId() {
@@ -119,6 +121,14 @@ public class CodetudeDTO {
         this.tags = tags;
     }
 
+    public Boolean getLive() {
+        return live;
+    }
+
+    public void setLive(Boolean live) {
+        this.live = live;
+    }
+
     @Override
     public String toString() {
         return "CodetudeDTO{" +
@@ -132,6 +142,7 @@ public class CodetudeDTO {
                 ", description='" + description + '\'' +
                 ", sourceCodeLink='" + sourceCodeLink + '\'' +
                 ", liveDemoLink='" + liveDemoLink + '\'' +
+                ", live=" + live +
                 ", tags=" + tags +
                 '}';
     }
@@ -151,12 +162,13 @@ public class CodetudeDTO {
                 Objects.equals(description, that.description) &&
                 Objects.equals(sourceCodeLink, that.sourceCodeLink) &&
                 Objects.equals(liveDemoLink, that.liveDemoLink) &&
+                Objects.equals(live, that.live) &&
                 Objects.equals(tags, that.tags);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, sourceCodeLink, liveDemoLink, tags);
+        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, sourceCodeLink, liveDemoLink, live, tags);
     }
 }
