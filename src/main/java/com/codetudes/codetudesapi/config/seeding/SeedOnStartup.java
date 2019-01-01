@@ -97,7 +97,7 @@ public class SeedOnStartup {
         createCodetude("Nocturne in E-flat Major (Op. 9, No. 2)",
                 "Chopin",
                 "Chopin composed his most well-known nocturne at the tender age of 20, which perhaps accounts for its youthful passion. The build-up from the main theme and waltz-like accompaniment to the dramatic trill-filled finale makes the Nocturne in E-flat Major a strong contender for the most beautiful piano work ever written.",
-                -5,
+                -10,
                 0,
                 "https://youtu.be/tV5U8kVYS88",
                 "https://youtu.be/tV5U8kVYS88",
@@ -106,8 +106,8 @@ public class SeedOnStartup {
         createCodetude("Scenes from Childhood",
                 "Schumann",
                 "Schumann’s Kinderszenen are a bittersweet collection of piano miniatures covering themes like games of chase, night-time terrors, bedtime stories and sleep. The most famous, ‘Traumerei’ paints a peaceful musical picture of a child’s dreams. It’s tender and beautifully nostalgic.",
-                -10,
-                -5,
+                -35,
+                0,
                 "https://youtu.be/yibf6QNjgGU",
                 "https://youtu.be/yibf6QNjgGU",
                 true,
@@ -115,7 +115,7 @@ public class SeedOnStartup {
         createCodetude("The Well-Tempered Clavier",
                 "J.S. Bach",
                 "The Well-Tempered Clavier was completely innovative for its day, and it paved the way for composers writing for keyboard instruments for the next few hundred years. Bach wrote the first of the two books that make up his work in 1722, making this one of the earliest pieces on our list. Each of the two books contain 24 Preludes and Fugues (the whole work is sometimes known as ‘The 48’), in each key of the Western scale – and each book opens with a prelude in C major, closing with a fugue in B minor.",
-                -30,
+                -65,
                 0,
                 "https://youtu.be/nPHIZw7HZq4",
                 "https://youtu.be/nPHIZw7HZq4",
@@ -144,8 +144,8 @@ public class SeedOnStartup {
         createCodetude("Piano Concerto No.2 in C minor",
                 "Rachmaninov",
                 "Rachmaninov’s Second Piano Concerto has claimed our Classic FM Hall of Fame top spot eight times since the chart began in 1996… but what makes this unassailably epic work of genius so special? Is it the first movement’s contrast between solo piano passages and storming orchestral themes? Is it the emotionally syrupy second movement, which gave Brief Encounter its unforgettable soundtrack? Or is it the third movement’s epic virtuosic finale, under which the finest of pianists can crack? ",
-                null,
-                -5,
+                -95,
+                -10,
                 "https://youtu.be/rEGOihjqO9w",
                 "https://youtu.be/rEGOihjqO9w",
                 true,
@@ -176,8 +176,8 @@ public class SeedOnStartup {
             Boolean live,
             String[] tagVals){
         Codetude codetude = new Codetude();
-        codetude.setStarted((startedOffset != null) ? new Date(System.currentTimeMillis() + (startedOffset*1000*60*60*24)) : null);
-        codetude.setFinished((finishedOffset != null) ? new Date(System.currentTimeMillis() + (finishedOffset*1000*60*60*24)) : null);
+        codetude.setStarted((startedOffset != null) ? new Date(System.currentTimeMillis() + ((long)startedOffset*1000*60*60*24)) : null);
+        codetude.setFinished((finishedOffset != null) ? new Date(System.currentTimeMillis() + ((long)finishedOffset*1000*60*60*24)) : null);
         codetude.setTitle(title);
         codetude.setSubtitle(subtitle);
         codetude.setDescription(description);
