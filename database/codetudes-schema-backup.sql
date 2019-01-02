@@ -36,7 +36,7 @@ CREATE TABLE `codetude` (
   `source_code_link` varchar(45) DEFAULT NULL,
   `live_demo_link` varchar(45) DEFAULT NULL,
   `live` tinyint(1) DEFAULT NULL,
-  `preview_image` longblob,
+  `preview_image` mediumtext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

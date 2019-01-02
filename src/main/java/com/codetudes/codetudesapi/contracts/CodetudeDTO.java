@@ -4,6 +4,7 @@ import com.codetudes.codetudesapi.domain.Tag;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,6 +31,8 @@ public class CodetudeDTO {
     private String liveDemoLink;
 
     private Boolean live;
+    
+    private String previewImage;
 
     private List<TagDTO> tags;
 
@@ -129,46 +132,118 @@ public class CodetudeDTO {
         this.live = live;
     }
 
-    @Override
-    public String toString() {
-        return "CodetudeDTO{" +
-                "id=" + id +
-                ", created=" + created +
-                ", updated=" + updated +
-                ", started=" + started +
-                ", finished=" + finished +
-                ", title='" + title + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", description='" + description + '\'' +
-                ", sourceCodeLink='" + sourceCodeLink + '\'' +
-                ", liveDemoLink='" + liveDemoLink + '\'' +
-                ", live=" + live +
-                ", tags=" + tags +
-                '}';
-    }
+	public String getPreviewImage() {
+		return previewImage;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CodetudeDTO that = (CodetudeDTO) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(created, that.created) &&
-                Objects.equals(updated, that.updated) &&
-                Objects.equals(started, that.started) &&
-                Objects.equals(finished, that.finished) &&
-                Objects.equals(title, that.title) &&
-                Objects.equals(subtitle, that.subtitle) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(sourceCodeLink, that.sourceCodeLink) &&
-                Objects.equals(liveDemoLink, that.liveDemoLink) &&
-                Objects.equals(live, that.live) &&
-                Objects.equals(tags, that.tags);
-    }
+	public void setPreviewImage(String previewImage) {
+		this.previewImage = previewImage;
+	}
 
-    @Override
-    public int hashCode() {
+	@Override
+	public String toString() {
+		return "CodetudeDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", started=" + started
+				+ ", finished=" + finished + ", title=" + title + ", subtitle=" + subtitle + ", description="
+				+ description + ", sourceCodeLink=" + sourceCodeLink + ", liveDemoLink=" + liveDemoLink + ", live="
+				+ live + ", previewImage=" + previewImage + ", tags=" + tags + "]";
+	}
 
-        return Objects.hash(id, created, updated, started, finished, title, subtitle, description, sourceCodeLink, liveDemoLink, live, tags);
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((finished == null) ? 0 : finished.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((live == null) ? 0 : live.hashCode());
+		result = prime * result + ((liveDemoLink == null) ? 0 : liveDemoLink.hashCode());
+		result = prime * result + ((previewImage == null) ? 0 : previewImage.hashCode());
+		result = prime * result + ((sourceCodeLink == null) ? 0 : sourceCodeLink.hashCode());
+		result = prime * result + ((started == null) ? 0 : started.hashCode());
+		result = prime * result + ((subtitle == null) ? 0 : subtitle.hashCode());
+		result = prime * result + ((tags == null) ? 0 : tags.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((updated == null) ? 0 : updated.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CodetudeDTO other = (CodetudeDTO) obj;
+		if (created == null) {
+			if (other.created != null)
+				return false;
+		} else if (!created.equals(other.created))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (finished == null) {
+			if (other.finished != null)
+				return false;
+		} else if (!finished.equals(other.finished))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (live == null) {
+			if (other.live != null)
+				return false;
+		} else if (!live.equals(other.live))
+			return false;
+		if (liveDemoLink == null) {
+			if (other.liveDemoLink != null)
+				return false;
+		} else if (!liveDemoLink.equals(other.liveDemoLink))
+			return false;
+		if (previewImage == null) {
+			if (other.previewImage != null)
+				return false;
+		} else if (!previewImage.equals(other.previewImage))
+			return false;
+		if (sourceCodeLink == null) {
+			if (other.sourceCodeLink != null)
+				return false;
+		} else if (!sourceCodeLink.equals(other.sourceCodeLink))
+			return false;
+		if (started == null) {
+			if (other.started != null)
+				return false;
+		} else if (!started.equals(other.started))
+			return false;
+		if (subtitle == null) {
+			if (other.subtitle != null)
+				return false;
+		} else if (!subtitle.equals(other.subtitle))
+			return false;
+		if (tags == null) {
+			if (other.tags != null)
+				return false;
+		} else if (!tags.equals(other.tags))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (updated == null) {
+			if (other.updated != null)
+				return false;
+		} else if (!updated.equals(other.updated))
+			return false;
+		return true;
+	}
+
+    
 }
