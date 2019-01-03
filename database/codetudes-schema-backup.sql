@@ -36,8 +36,10 @@ CREATE TABLE `codetude` (
   `source_code_link` varchar(45) DEFAULT NULL,
   `live_demo_link` varchar(45) DEFAULT NULL,
   `live` tinyint(1) DEFAULT NULL,
-  `preview_image` mediumtext,
-  PRIMARY KEY (`id`)
+  `preview_image` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_image_id_idx` (`preview_image`),
+  CONSTRAINT `fk_image_id` FOREIGN KEY (`preview_image`) REFERENCES `image` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,6 +59,20 @@ CREATE TABLE `codetude_tag` (
   KEY `fk_tag_id_idx` (`tag_id`),
   CONSTRAINT `fk_codetude_id` FOREIGN KEY (`codetude_id`) REFERENCES `codetude` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8 ;
+CREATE TABLE `image` (
+  `id` int(11) NOT NULL,
+  `value` mediumtext NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
