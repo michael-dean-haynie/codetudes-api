@@ -13,10 +13,12 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
@@ -239,11 +241,9 @@ public class SeedOnStartup {
     	String encodedFile = "";
         try {
         	ClassLoader classLoader = getClass().getClassLoader();
-        	File file = new File(classLoader.getResource(filePath).getFile());
-        	FileInputStream fileInputStreamReader = new FileInputStream(file);
-            byte[] bytes = new byte[(int)file.length()];
-        	fileInputStreamReader.read(bytes);
-            fileInputStreamReader.close();
+        	InputStream inputStreamReader = classLoader.getResourceAsStream(filePath);
+            byte[] bytes = StreamUtils.copyToByteArray(inputStreamReader);
+            inputStreamReader.close();
             encodedFile = new String(Base64.encodeBase64(bytes), "UTF-8");
             encodedFile = "data:image;base64," + encodedFile;
 		} catch (IOException e) {
