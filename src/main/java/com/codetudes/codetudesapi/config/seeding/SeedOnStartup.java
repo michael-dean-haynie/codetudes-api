@@ -1,10 +1,11 @@
 package com.codetudes.codetudesapi.config.seeding;
 
 import com.codetudes.codetudesapi.domain.Codetude;
+import com.codetudes.codetudesapi.domain.Image;
 import com.codetudes.codetudesapi.domain.Tag;
 import com.codetudes.codetudesapi.repositories.CodetudeRepository;
+import com.codetudes.codetudesapi.repositories.ImageRepository;
 import com.codetudes.codetudesapi.repositories.TagRepository;
-import org.modelmapper.ModelMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -13,13 +14,18 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.*;
+import org.apache.commons.codec.binary.Base64;
 
 @Component
 public class SeedOnStartup {
     private Map tagMap = new HashMap<String, Tag>();
     private Map codetudeMap = new HashMap<String, Codetude>();
+    private List imageList = new ArrayList<Long>();
 
     @Autowired
     private Environment env;
@@ -35,6 +41,9 @@ public class SeedOnStartup {
 
     @Autowired
     private TagRepository tagRepository;
+    
+    @Autowired
+    private ImageRepository imageRepository;
 
 
     @EventListener
@@ -68,6 +77,25 @@ public class SeedOnStartup {
     }
 
     private void seed(){
+    	// Create Images
+    	ArrayList imagePaths = new ArrayList<String>(
+			Arrays.asList(
+				"seeding-images/preview1.jpg",
+				"seeding-images/preview2.jpg",
+				"seeding-images/preview3.jpg",
+				"seeding-images/preview4.jpg",
+				"seeding-images/preview5.jpg",
+				"seeding-images/preview6.jpg",
+				"seeding-images/preview7.jpg",
+				"seeding-images/preview8.png"
+			)
+		);
+    	
+    	imagePaths.forEach(path->{
+    		createImage(loadImageFileAsBase64String((String) path));
+    	});
+	
+    	
         // Create Tags
         String[] tagVals = new String[]{"Motif", "Piano", "Jazz", "A cappella", "Duet", "Polyphony", "Rondo", "Trill", "Waltz", "Sonata", "Prelude", "Trio", "Impressionism", "Pianissimo", "Compound Meter", "Minor", "Arpeggio", "Counter Melody"};
 
@@ -86,6 +114,7 @@ public class SeedOnStartup {
                 "https://youtu.be/4Tr0otuiQuU",
                 "https://youtu.be/4Tr0otuiQuU",
                 false,
+                getImageId(),
                 new String[]{"Sonata", "Prelude", "Trio", "Trill", "Compound Meter"} );
         createCodetude("Clair de Lune",
                 "Debussy",
@@ -95,6 +124,7 @@ public class SeedOnStartup {
                 "https://youtu.be/4fvo_iOuSck",
                 "https://youtu.be/4fvo_iOuSck",
                 true,
+                getImageId(),
                 new String[]{"Impressionism", "Pianissimo", "Compound Meter"} );
         createCodetude("Nocturne in E-flat Major (Op. 9, No. 2)",
                 "Chopin",
@@ -104,6 +134,7 @@ public class SeedOnStartup {
                 "https://youtu.be/tV5U8kVYS88",
                 "https://youtu.be/tV5U8kVYS88",
                 true,
+                getImageId(),
                 new String[]{"Minor", "Arpeggio", "Counter Melody", "Trill"} );
         createCodetude("Scenes from Childhood",
                 "Schumann",
@@ -113,6 +144,7 @@ public class SeedOnStartup {
                 "https://youtu.be/yibf6QNjgGU",
                 "https://youtu.be/yibf6QNjgGU",
                 true,
+                getImageId(),
                 new String[]{"A cappella", "Duet", "Polyphony", "Compound Meter"} );
         createCodetude("The Well-Tempered Clavier",
                 "J.S. Bach",
@@ -122,6 +154,7 @@ public class SeedOnStartup {
                 "https://youtu.be/nPHIZw7HZq4",
                 "https://youtu.be/nPHIZw7HZq4",
                 true,
+                getImageId(),
                 new String[]{"Rondo", "Trill", "Waltz", "Motif"} );
         createCodetude("Rhapsody in Blue",
                 "Gershwin",
@@ -131,6 +164,7 @@ public class SeedOnStartup {
                 "https://youtu.be/ss2GFGMu198",
                 "https://youtu.be/ss2GFGMu198",
                 true,
+                getImageId(),
                 new String[]{"Jazz", "Trill"} );
         createCodetude("Piano sonata in B minor",
                 "Liszt",
@@ -142,6 +176,7 @@ public class SeedOnStartup {
                 "https://youtu.be/68EMzR3Ct78",
                 "https://youtu.be/68EMzR3Ct78",
                 true,
+                getImageId(),
                 new String[]{"Minor", "Piano"} );
         createCodetude("Piano Concerto No.2 in C minor",
                 "Rachmaninov",
@@ -151,6 +186,7 @@ public class SeedOnStartup {
                 "https://youtu.be/rEGOihjqO9w",
                 "https://youtu.be/rEGOihjqO9w",
                 true,
+                getImageId(),
                 new String[]{} );
 
     }
@@ -165,6 +201,7 @@ public class SeedOnStartup {
      * @param scl
      * @param ldl
      * @param live
+     * @param previewImageId
      * @param tagVals
      */
     private void createCodetude(
@@ -176,6 +213,7 @@ public class SeedOnStartup {
             String scl,
             String ldl,
             Boolean live,
+            Long previewImageId,
             String[] tagVals){
         Codetude codetude = new Codetude();
         codetude.setStarted((startedOffset != null) ? new Date(System.currentTimeMillis() + ((long)startedOffset*1000*60*60*24)) : null);
@@ -186,6 +224,7 @@ public class SeedOnStartup {
         codetude.setSourceCodeLink(scl);
         codetude.setLiveDemoLink(ldl);
         codetude.setLive(live);
+        codetude.setPreviewImageId(previewImageId);
 
         List<Tag> tags = new ArrayList<>();
         for(String tagVal : tagVals){
@@ -194,5 +233,41 @@ public class SeedOnStartup {
         codetude.setTags(tags);
 
         codetudeMap.put(title, codetudeRepository.save(codetude));
+    }
+    
+    private String loadImageFileAsBase64String(String filePath){
+    	String encodedFile = "";
+        try {
+        	ClassLoader classLoader = getClass().getClassLoader();
+        	File file = new File(classLoader.getResource(filePath).getFile());
+        	FileInputStream fileInputStreamReader = new FileInputStream(file);
+            byte[] bytes = new byte[(int)file.length()];
+        	fileInputStreamReader.read(bytes);
+            fileInputStreamReader.close();
+            encodedFile = new String(Base64.encodeBase64(bytes), "UTF-8");
+            encodedFile = "data:image;base64," + encodedFile;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return encodedFile;
+    }
+    
+    private void createImage(String value) {
+    	Image image = new Image();
+        image.setValue(value);
+        
+        image = imageRepository.save(image);
+        imageList.add(image.getId());
+    }
+    
+    private Long getImageId() {
+    	if (imageList.isEmpty()) {
+    		return null;
+    	} else {
+    		Long pickedId = (Long) imageList.get(0);
+    		imageList.remove(0);
+    		return pickedId;
+    	}
     }
 }
