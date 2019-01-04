@@ -6,6 +6,44 @@
 	},
 	"item": [
 		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "codetudes",
 			"item": [
 				{
@@ -96,7 +134,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"CSS\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{host}}/codetudes/4",
@@ -181,7 +219,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{host}}/codetudes",
 							"host": [
@@ -286,7 +327,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"started\": \"2018-08-18\",\n\t\"finished\": \"2018-08-18\",\n\t\"title\": \"title\",\n\t\"subtitle\": \"subtitle\",\n\t\"description\": \"description\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"id\": 1,\n\t\t\t\"name\": \"HTML\"\n\t\t},\n\t\t{\n\t\t\t\"id\": 2,\n\t\t\t\"name\": \"CSS\"\n\t\t}\n\t],\n\t\"sourceCodeLink\": \"sourceCodeLink\",\n\t\"liveDemoLink\": \"liveDemoLink\"\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{host}}/tags/1",
@@ -371,7 +412,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{host}}/tags",
 							"host": [
@@ -387,36 +431,133 @@
 			]
 		},
 		{
-			"name": "auth",
+			"name": "images",
 			"item": [
 				{
-					"name": "login",
+					"name": "create",
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
+									"key": "token",
+									"value": "{{jwt}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
-						"header": [],
-						"body": {},
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"value\": \"abcdefg\"\n}"
+						},
 						"url": {
-							"raw": "{{host}}/login",
+							"raw": "{{host}}/images",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"login"
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/images/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"images",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"value\": \"ABCDEFG\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/images",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/images/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"images",
+								"1"
 							]
 						}
 					},

@@ -40,9 +40,7 @@ public class Codetude {
 
     private Boolean live;
     
-    // https://stackoverflow.com/questions/3868096/jpa-how-do-i-persist-a-string-into-a-database-field-type-mysql-text
-    @Lob
-    private String previewImage;
+    private Long previewImageId;
 
     @OneToMany(
             cascade={CascadeType.MERGE},
@@ -151,12 +149,12 @@ public class Codetude {
         this.live = live;
     }
 
-	public String getPreviewImage() {
-		return previewImage;
+	public Long getPreviewImageId() {
+		return previewImageId;
 	}
 
-	public void setPreviewImage(String previewImage) {
-		this.previewImage = previewImage;
+	public void setPreviewImageId(Long previewImageId) {
+		this.previewImageId = previewImageId;
 	}
 
 	@Override
@@ -164,7 +162,7 @@ public class Codetude {
 		return "Codetude [id=" + id + ", created=" + created + ", updated=" + updated + ", started=" + started
 				+ ", finished=" + finished + ", title=" + title + ", subtitle=" + subtitle + ", description="
 				+ description + ", sourceCodeLink=" + sourceCodeLink + ", liveDemoLink=" + liveDemoLink + ", live="
-				+ live + ", previewImage=" + previewImage + ", tags=" + tags + "]";
+				+ live + ", previewImageId=" + previewImageId + ", tags=" + tags + "]";
 	}
 
 	@Override
@@ -177,7 +175,7 @@ public class Codetude {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((live == null) ? 0 : live.hashCode());
 		result = prime * result + ((liveDemoLink == null) ? 0 : liveDemoLink.hashCode());
-		result = prime * result + ((previewImage == null) ? 0 : previewImage.hashCode());
+		result = prime * result + ((previewImageId == null) ? 0 : previewImageId.hashCode());
 		result = prime * result + ((sourceCodeLink == null) ? 0 : sourceCodeLink.hashCode());
 		result = prime * result + ((started == null) ? 0 : started.hashCode());
 		result = prime * result + ((subtitle == null) ? 0 : subtitle.hashCode());
@@ -226,10 +224,10 @@ public class Codetude {
 				return false;
 		} else if (!liveDemoLink.equals(other.liveDemoLink))
 			return false;
-		if (previewImage == null) {
-			if (other.previewImage != null)
+		if (previewImageId == null) {
+			if (other.previewImageId != null)
 				return false;
-		} else if (!previewImage.equals(other.previewImage))
+		} else if (!previewImageId.equals(other.previewImageId))
 			return false;
 		if (sourceCodeLink == null) {
 			if (other.sourceCodeLink != null)
@@ -263,5 +261,7 @@ public class Codetude {
 			return false;
 		return true;
 	}
+
+	
+
 }
-    

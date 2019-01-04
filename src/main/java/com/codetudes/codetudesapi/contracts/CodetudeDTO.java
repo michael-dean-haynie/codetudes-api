@@ -1,12 +1,8 @@
 package com.codetudes.codetudesapi.contracts;
 
-import com.codetudes.codetudesapi.domain.Tag;
-
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class CodetudeDTO {
 
@@ -32,7 +28,7 @@ public class CodetudeDTO {
 
     private Boolean live;
     
-    private String previewImage;
+    private Long previewImageId;
 
     private List<TagDTO> tags;
 
@@ -132,12 +128,12 @@ public class CodetudeDTO {
         this.live = live;
     }
 
-	public String getPreviewImage() {
-		return previewImage;
+	public Long getPreviewImageId() {
+		return previewImageId;
 	}
 
-	public void setPreviewImage(String previewImage) {
-		this.previewImage = previewImage;
+	public void setPreviewImageId(Long previewImageId) {
+		this.previewImageId = previewImageId;
 	}
 
 	@Override
@@ -145,7 +141,7 @@ public class CodetudeDTO {
 		return "CodetudeDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", started=" + started
 				+ ", finished=" + finished + ", title=" + title + ", subtitle=" + subtitle + ", description="
 				+ description + ", sourceCodeLink=" + sourceCodeLink + ", liveDemoLink=" + liveDemoLink + ", live="
-				+ live + ", previewImage=" + previewImage + ", tags=" + tags + "]";
+				+ live + ", previewImageId=" + previewImageId + ", tags=" + tags + "]";
 	}
 
 	@Override
@@ -158,7 +154,7 @@ public class CodetudeDTO {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((live == null) ? 0 : live.hashCode());
 		result = prime * result + ((liveDemoLink == null) ? 0 : liveDemoLink.hashCode());
-		result = prime * result + ((previewImage == null) ? 0 : previewImage.hashCode());
+		result = prime * result + ((previewImageId == null) ? 0 : previewImageId.hashCode());
 		result = prime * result + ((sourceCodeLink == null) ? 0 : sourceCodeLink.hashCode());
 		result = prime * result + ((started == null) ? 0 : started.hashCode());
 		result = prime * result + ((subtitle == null) ? 0 : subtitle.hashCode());
@@ -207,10 +203,10 @@ public class CodetudeDTO {
 				return false;
 		} else if (!liveDemoLink.equals(other.liveDemoLink))
 			return false;
-		if (previewImage == null) {
-			if (other.previewImage != null)
+		if (previewImageId == null) {
+			if (other.previewImageId != null)
 				return false;
-		} else if (!previewImage.equals(other.previewImage))
+		} else if (!previewImageId.equals(other.previewImageId))
 			return false;
 		if (sourceCodeLink == null) {
 			if (other.sourceCodeLink != null)
@@ -244,6 +240,5 @@ public class CodetudeDTO {
 			return false;
 		return true;
 	}
-
-    
+	
 }

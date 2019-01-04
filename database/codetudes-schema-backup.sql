@@ -36,10 +36,8 @@ CREATE TABLE `codetude` (
   `source_code_link` varchar(45) DEFAULT NULL,
   `live_demo_link` varchar(45) DEFAULT NULL,
   `live` tinyint(1) DEFAULT NULL,
-  `preview_image` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_image_id_idx` (`preview_image`),
-  CONSTRAINT `fk_image_id` FOREIGN KEY (`preview_image`) REFERENCES `image` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `preview_image_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,7 +68,7 @@ DROP TABLE IF EXISTS `image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
 CREATE TABLE `image` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

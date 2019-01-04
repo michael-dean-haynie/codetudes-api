@@ -48,6 +48,7 @@ public class SeedOnStartup {
 
     private void emptyTables(){
         // order probably matters...
+    	jdbcTemplate.execute("DELETE FROM `codetudes`.`image`        WHERE `id` > 0;");
         jdbcTemplate.execute("DELETE FROM `codetudes`.`tag`          WHERE `id` > 0;");
         jdbcTemplate.execute("DELETE FROM `codetudes`.`codetude`     WHERE `id` > 0;");
         jdbcTemplate.execute("DELETE FROM `codetudes`.`codetude_tag` WHERE `id` > 0;");
@@ -57,6 +58,7 @@ public class SeedOnStartup {
     }
 
     private void resetAutoIncrement(){
+    	jdbcTemplate.execute("ALTER TABLE `codetudes`.`image`        AUTO_INCREMENT = 1;");
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`tag`          AUTO_INCREMENT = 1;");
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`codetude`     AUTO_INCREMENT = 1;");
         jdbcTemplate.execute("ALTER TABLE `codetudes`.`codetude_tag` AUTO_INCREMENT = 1;");
