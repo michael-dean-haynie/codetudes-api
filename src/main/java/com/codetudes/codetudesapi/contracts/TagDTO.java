@@ -49,30 +49,4 @@ public class TagDTO {
         this.updated = updated;
     }
 
-    @Override
-    public String toString() {
-        return "TagDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", created=" + created +
-                ", updated=" + updated +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TagDTO tagDTO = (TagDTO) o;
-        return Objects.equals(id, tagDTO.id) &&
-                Objects.equals(name, tagDTO.name) &&
-                Objects.equals(created, tagDTO.created) &&
-                Objects.equals(updated, tagDTO.updated);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, name, created, updated);
-    }
 }
