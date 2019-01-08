@@ -24,7 +24,7 @@ public class Codetude {
     @UpdateTimestamp
     private Timestamp updated;
 
-    private Date started;
+    private Timestamp started;
 
     private String title;
 
@@ -75,11 +75,11 @@ public class Codetude {
         this.updated = updated;
     }
 
-    public Date getStarted() {
+    public Timestamp getStarted() {
         return started;
     }
 
-    public void setStarted(Date started) {
+    public void setStarted(Timestamp started) {
         this.started = started;
     }
 

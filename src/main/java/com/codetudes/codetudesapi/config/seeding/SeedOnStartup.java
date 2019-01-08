@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 
@@ -209,7 +210,7 @@ public class SeedOnStartup {
             Long previewImageId,
             String[] tagVals){
         Codetude codetude = new Codetude();
-        codetude.setStarted((startedOffset != null) ? new Date(System.currentTimeMillis() + ((long)startedOffset*1000*60*60*24)) : null);
+        codetude.setStarted((startedOffset != null) ? new Timestamp(System.currentTimeMillis() + ((long)startedOffset*1000*60*60*24)) : null);
         codetude.setTitle(title);
         codetude.setSubtitle(subtitle);
         codetude.setDescription(description);
