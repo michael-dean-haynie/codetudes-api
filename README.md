@@ -1,6 +1,6 @@
 # Codetudes API
 
-Provides RESTful endpoints for CRUD operations on codetudes.com data.
+A Spring Boot RESTful API with endpoints for CRUD operations on codetudes.com data.
 
 ## Local Development Setup
 1. Use [codetudes-schema-backup.sql](./database/codetudes-schema-backup.sql) to initialize codetudes database (mysql)
